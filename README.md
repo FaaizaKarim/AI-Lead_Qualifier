@@ -28,8 +28,8 @@ cp .env.example .env
 ```
 
 Edit `.env` and fill in:
-- `GROK_API_KEY` — get free at [console.x.ai](https://console.x.ai)
-- `GROK_MODEL` — use `grok-3-mini` (free tier)
+- `openRouter_API_KEY` — get free at [console.x.ai](https://console.x.ai)
+- `openrouter_MODEL` — use `grok-3-mini` (free tier)
 - `DASHBOARD_API_KEY` — any secret string for dashboard auth
 - `CALENDLY_BOOKING_URL` — your Calendly scheduling link
 - `CALENDLY_API_KEY` — optional, enables personalized booking links
