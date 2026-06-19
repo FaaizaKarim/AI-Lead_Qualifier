@@ -1,0 +1,155 @@
+# 🤖 AI Lead Qualifier Agent
+
+An AI-powered Sales Development Representative that lives on your website, qualifies visitors, and books meetings — automatically.
+
+**Built with:** Grok AI (xAI) · Calendly · SQLite · React + Vite · Node.js + Express
+
+---
+
+## 🚀 Quick Start
+
+### 1. Clone and install
+
+```bash
+# Backend
+cd backend
+npm install
+
+# Frontend
+cd ../frontend
+npm install
+```
+
+### 2. Configure backend
+
+```bash
+cd backend
+cp .env.example .env
+```
+
+Edit `.env` and fill in:
+- `GROK_API_KEY` — get free at [console.x.ai](https://console.x.ai)
+- `GROK_MODEL` — use `grok-3-mini` (free tier)
+- `DASHBOARD_API_KEY` — any secret string for dashboard auth
+- `CALENDLY_BOOKING_URL` — your Calendly scheduling link
+- `CALENDLY_API_KEY` — optional, enables personalized booking links
+
+### 3. Start backend
+
+```bash
+cd backend
+npm run dev
+# → API running at http://localhost:3001
+```
+
+### 4. Start frontend
+
+```bash
+cd frontend
+npm run dev
+# → Dashboard at http://localhost:5173
+```
+
+---
+
+## 📁 File Structure
+
+```
+ai-lead-qualifier/
+├── backend/
+│   ├── src/
+│   │   ├── app.js                  ← Express entry point
+│   │   ├── routes/
+│   │   │   ├── chat.js             ← POST /api/chat (Grok AI)
+│   │   │   ├── leads.js            ← GET/DELETE /api/leads
+│   │   │   └── meetings.js         ← POST /api/meetings/book
+│   │   ├── services/
+│   │   │   ├── grokService.js      ← Grok API + system prompt
+│   │   │   ├── qualifierService.js ← BANT extraction + scoring
+│   │   │   ├── meetingService.js   ← Calendly integration
+│   │   │   └── emailService.js     ← Booking confirmation emails
+│   │   ├── models/
+│   │   │   ├── Lead.js             ← Lead DB operations
+│   │   │   └── Conversation.js     ← Chat history DB operations
+│   │   ├── middleware/
+│   │   │   ├── auth.js             ← API key protection
+│   │   │   └── cors.js             ← CORS for embeds
+│   │   └── db/
+│   │       ├── database.js         ← SQLite connection
+│   │       └── migrations.js       ← Table setup
+│   └── .env.example
+│
+├── frontend/
+│   └── src/
+│       ├── components/
+│       │   ├── ChatWidget.jsx      ← Floating chat bubble
+│       │   ├── ChatWindow.jsx      ← Full chat UI
+│       │   ├── Dashboard.jsx       ← Stats + lead management
+│       │   ├── Sidebar.jsx         ← Lead list with filters
+│       │   ├── LeadCard.jsx        ← Lead detail + transcript
+│       │   ├── QualPanel.jsx       ← BANT score breakdown
+│       │   └── MeetingPanel.jsx    ← Booking status
+│       ├── pages/
+│       │   ├── Home.jsx            ← Main dashboard page
+│       │   └── EmbedPage.jsx       ← Standalone widget page
+│       ├── hooks/
+│       │   ├── useChat.js          ← Chat state management
+│       │   └── useLeads.js         ← Lead data fetching
+│       └── utils/
+│           └── scoring.js          ← Score colors + helpers
+│
+└── embed/
+    └── widget.js                   ← One-line embed script
+```
+
+---
+
+## 🔌 API Endpoints
+
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| POST | `/api/chat` | None | Send message, get AI response |
+| GET | `/api/chat/session/:id` | None | Get conversation transcript |
+| GET | `/api/leads` | API Key | List all leads |
+| GET | `/api/leads/stats` | API Key | Dashboard stats |
+| GET | `/api/leads/:id` | API Key | Lead detail + history |
+| DELETE | `/api/leads/:id` | API Key | Delete a lead |
+| POST | `/api/meetings/book` | None | Trigger booking for session |
+| POST | `/api/meetings/webhook` | None | Calendly webhook receiver |
+| GET | `/api/meetings` | API Key | List all booked meetings |
+
+---
+
+## 🌐 Embed on any website
+
+Paste before `</body>`:
+
+```html
+<script src="https://your-domain.com/widget.js" data-api="https://your-domain.com/api" async></script>
+```
+
+Works on: Webflow, WordPress, Wix, Shopify, custom HTML — anywhere.
+
+---
+
+## 💰 Pricing Tiers (suggested)
+
+| Plan | Price | Features |
+|------|-------|----------|
+| Starter | $49/mo | 1 site · 100 leads/mo · Basic chat |
+| Growth ⭐ | $149/mo | AI qualification · Calendly booking · Email follow-ups |
+| Pro | $399/mo | Multi-site · Advanced scoring · Team dashboard |
+
+**10 Growth customers = $1,490 MRR** — you need zero code changes to get there.
+
+---
+
+## 🛠 Tech Stack
+
+- **AI:** Grok (xAI free API) — `grok-3-mini`
+- **Backend:** Node.js, Express, better-sqlite3
+- **Frontend:** React 18, Vite, React Router
+- **Database:** SQLite (zero setup, file-based)
+- **Booking:** Calendly API
+- **Email:** Nodemailer (Gmail SMTP)
+- **Embed:** Vanilla JS widget (~3kb)
