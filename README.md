@@ -1,3 +1,5 @@
+<img width="1915" height="833" alt="image" src="https://github.com/user-attachments/assets/42965cb1-08fc-41ed-9571-fc588836d041" />
+
 # 🤖 AI Lead Qualifier Agent
 
 An AI-powered Sales Development Representative that lives on your website, qualifies visitors, and books meetings — automatically.
